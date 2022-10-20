@@ -15,6 +15,7 @@ permissions:
   contents: read
 
 jobs:
+
   create_runner:
     name: Create Runner
     runs-on: ubuntu-22.04
@@ -36,6 +37,7 @@ jobs:
   runner_job:
     name: Runner Job
     runs-on: [self-hosted, "${{ needs.create_runner.outputs.runner_name }}" ]
+    environment: prod
     needs: create_runner
     
     steps:
@@ -54,8 +56,8 @@ jobs:
   cleanup_runner:
     name: Cleanup Runner
     runs-on: ubuntu-22.04
-    environment: prod
     needs: [ create_runner, runner_job]
+    environment: prod
     steps:
       - name: Cleanup GitHub Runner 
         id: cleanup_github_runner
