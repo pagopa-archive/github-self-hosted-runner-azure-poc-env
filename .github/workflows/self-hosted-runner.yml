@@ -18,6 +18,7 @@ jobs:
   create_runner:
     name: Create Runner
     runs-on: ubuntu-22.04
+    environment: prod
     outputs:
       runner_name: ${{ steps.create_github_runner.outputs.runner_name }}
     steps:
@@ -53,6 +54,7 @@ jobs:
   cleanup_runner:
     name: Cleanup Runner
     runs-on: ubuntu-22.04
+    environment: prod
     needs: [ create_runner, runner_job]
     steps:
       - name: Cleanup GitHub Runner 
